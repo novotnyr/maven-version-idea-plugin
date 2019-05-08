@@ -7,10 +7,14 @@ version '1-SNAPSHOT'
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
-    version '2019.1.1'
+    version '2018.1'
+    plugins 'Maven'
+    updateSinceUntilBuild false
 }
+
 patchPluginXml {
+    sinceBuild '143'
     changeNotes """
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>"""
+      Initial release"""
 }
+
