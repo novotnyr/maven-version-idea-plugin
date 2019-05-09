@@ -8,7 +8,14 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>org.jetbrains.idea.maven</depends>
 
+    <project-components>
+        <component>
+            <implementation-class>com.github.novotnyr.mavenversion.ProjectToolWindowGearActionDecorator</implementation-class>
+        </component>
+    </project-components>
+
     <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.github.novotnyr.mavenversion.PluginSettings"/>
         <projectViewNodeDecorator implementation="com.github.novotnyr.mavenversion.MavenVersionProjectViewDecorator"/>
     </extensions>
 

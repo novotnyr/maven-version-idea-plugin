@@ -18,6 +18,7 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
     @Override
     public void decorate(ProjectViewNode node, PresentationData data) {
         Optional.of(node)
+                .filter(this::isDecorating)
                 .map(ProjectViewNode::getProject)
                 .map(MavenProjectsManager::getInstance)
                 .filter(MavenProjectsManager::isMavenizedProject)
@@ -25,6 +26,10 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
                         .map(mavenProjectsManager::findProject)
                         .flatMap(MavenVersionProjectViewDecorator.this::getVersion)
                         .ifPresent(doDecorate(data)));
+    }
+
+    private boolean isDecorating(ProjectViewNode node) {
+        return PluginSettings.getInstance().isShowVersion();
     }
 
     private Consumer<String> doDecorate(PresentationData data) {
