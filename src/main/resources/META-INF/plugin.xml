@@ -5,6 +5,15 @@
 
     <description>Displays Maven artifact version in the Project Tree view</description>
 
+    <description><![CDATA[
+        <b>Displays Maven artifact version in the Project Tree view</b>
+        <ul>
+            <li>Show Maven version from <tt>pom.xml</tt> for each Project module
+            in the Project view.</li>
+            <li>Toggle Maven versions from the <em>Gear</em> button in the project view.</li>
+        </ul>
+    ]]></description>
+
     <depends>com.intellij.modules.lang</depends>
     <depends>org.jetbrains.idea.maven</depends>
 
