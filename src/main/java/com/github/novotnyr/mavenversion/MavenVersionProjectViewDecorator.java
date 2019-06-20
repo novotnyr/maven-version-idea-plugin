@@ -3,6 +3,7 @@ package com.github.novotnyr.mavenversion;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
+import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.packageDependencies.ui.PackageDependenciesNode;
 import com.intellij.ui.ColoredTreeCellRenderer;
@@ -33,7 +34,8 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
     }
 
     private Consumer<String> doDecorate(PresentationData data) {
-        return version -> data.addText("\t" + version, SimpleTextAttributes.GRAY_ATTRIBUTES);
+        String separator = SystemInfo.isWindows ? "  " : "\t";
+        return version -> data.addText(separator + version, SimpleTextAttributes.GRAY_ATTRIBUTES);
     }
 
     private Optional<String> getVersion(MavenProject mavenProject) {
