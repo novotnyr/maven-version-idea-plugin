@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.github.novotnyr'
-version '2-SNAPSHOT'
+version '2'
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
@@ -15,6 +15,6 @@ intellij {
 patchPluginXml {
     sinceBuild '143'
     changeNotes """
-      Initial release"""
+      Improve Windows compatibility"""
 }
 
