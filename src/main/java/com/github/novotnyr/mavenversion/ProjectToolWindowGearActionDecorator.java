@@ -1,5 +1,6 @@
 package com.github.novotnyr.mavenversion;
 
+import com.intellij.ide.projectView.ProjectView;
 import com.intellij.ide.projectView.impl.ProjectViewImpl;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
@@ -9,6 +10,7 @@ import com.intellij.openapi.wm.ToolWindowId;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
+import com.intellij.ui.switcher.QuickActionProvider;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -32,9 +34,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
     }
 
     private void decorateToolWindow(ToolWindowEx toolWindow) {
-        List<AnAction> actions = getProjectView()
-                .map(projectView -> projectView.getActions(false))
-                .orElse(new ArrayList<>());
+        List<AnAction> actions = getActions(toolWindow);
 
         if (actions.size() > 2) {
             // see com.intellij.ide.projectView.impl.ProjectViewImpl.getActions
@@ -43,6 +43,16 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
         }
         actions.add(createToggleMavenVersionAction());
         toolWindow.setAdditionalGearActions(new DefaultActionGroup(actions));
+    }
+
+    private List<AnAction> getActions(ToolWindowEx toolWindowEx) {
+        ProjectView projectView = ProjectView.getInstance(this.project);
+        if (projectView instanceof QuickActionProvider) {
+            var defaultActions = ((QuickActionProvider) projectView).getActions(false);
+            return new ArrayList<>(defaultActions);
+        } else {
+            return new ArrayList<>();
+        }
     }
 
     private Optional<ProjectViewImpl> getProjectView() {
