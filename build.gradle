@@ -3,7 +3,7 @@ plugins {
 }
 
 group 'com.github.novotnyr'
-version '2'
+version '3-SNAPSHOT'
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
