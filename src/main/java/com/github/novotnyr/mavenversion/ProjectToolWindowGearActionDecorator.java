@@ -6,6 +6,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindowId;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
@@ -57,11 +58,8 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
     }
 
     private Optional<ToolWindowEx> getToolWindow() {
-        ToolWindowManagerEx toolWindowManager = ToolWindowManagerEx.getInstanceEx(this.project);
-        return Optional.of(toolWindowManager)
-                .map(ToolWindowManagerEx::getLastActiveToolWindowId)
-                .filter("Project"::equals)
-                .map(toolWindowManager::getToolWindow)
+        return Optional.of(ToolWindowManagerEx.getInstanceEx(this.project))
+                .map(toolWindowManager -> toolWindowManager.getToolWindow(ToolWindowId.PROJECT_VIEW))
                 .filter(ToolWindowEx.class::isInstance)
                 .map(ToolWindowEx.class::cast);
     }
