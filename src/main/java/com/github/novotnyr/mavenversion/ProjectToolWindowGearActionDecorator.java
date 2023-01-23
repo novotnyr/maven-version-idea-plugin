@@ -6,7 +6,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowId;
+import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
@@ -28,8 +30,12 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
     }
 
     @Override
-    public void stateChanged() {
-        getToolWindow().ifPresent(this::decorateToolWindow);
+    public void stateChanged(@NotNull ToolWindowManager toolWindowManager) {
+        ToolWindow projectView = toolWindowManager.getToolWindow(ToolWindowId.PROJECT_VIEW);
+        if (projectView instanceof ToolWindowEx) {
+            var projectViewEx = (ToolWindowEx) projectView;
+            this.decorateToolWindow(projectViewEx);
+        }
     }
 
     private void decorateToolWindow(ToolWindowEx toolWindow) {
