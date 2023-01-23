@@ -17,11 +17,10 @@
     <depends>com.intellij.modules.lang</depends>
     <depends>org.jetbrains.idea.maven</depends>
 
-    <project-components>
-        <component>
-            <implementation-class>com.github.novotnyr.mavenversion.ProjectToolWindowGearActionDecorator</implementation-class>
-        </component>
-    </project-components>
+    <projectListeners>
+        <listener class="com.github.novotnyr.mavenversion.ProjectToolWindowGearActionDecorator"
+                  topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener"/>
+    </projectListeners>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.novotnyr.mavenversion.PluginSettings"/>

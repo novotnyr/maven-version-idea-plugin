@@ -1,31 +1,25 @@
 package com.github.novotnyr.mavenversion;
 
 import com.intellij.ide.projectView.impl.ProjectViewImpl;
-import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowId;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
-import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerListener, ProjectComponent, Disposable {
+public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerListener {
     private final Project project;
-    private final MessageBusConnection projectBusConnection;
 
     public ProjectToolWindowGearActionDecorator(Project project) {
         this.project = project;
-        this.projectBusConnection = this.project.getMessageBus().connect();
-        this.projectBusConnection.subscribe(ToolWindowManagerListener.TOPIC, this);
     }
 
     @Override
@@ -67,10 +61,5 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
 
     private void refreshProjectView() {
         getProjectView().ifPresent(ProjectViewImpl::refresh);
-    }
-
-    @Override
-    public void dispose() {
-        this.projectBusConnection.disconnect();
     }
 }
