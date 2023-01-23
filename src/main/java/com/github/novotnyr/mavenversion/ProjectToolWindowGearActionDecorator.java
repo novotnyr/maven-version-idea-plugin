@@ -10,7 +10,6 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowId;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.openapi.wm.ex.ToolWindowEx;
-import com.intellij.openapi.wm.ex.ToolWindowManagerEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
 import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
@@ -52,22 +51,11 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
         toolWindow.setAdditionalGearActions(new DefaultActionGroup(actions));
     }
 
-    private ToolWindowManagerEx getToolWindowManager() {
-        return ToolWindowManagerEx.getInstanceEx(this.project);
-    }
-
     private Optional<ProjectViewImpl> getProjectView() {
         return Optional.of(ProjectViewImpl.getInstance(this.project))
                 .filter(ProjectViewImpl.class::isInstance)
                 .map(ProjectViewImpl.class::cast)
                 .filter(projectView -> projectView.getContentManager() != null);
-    }
-
-    private Optional<ToolWindowEx> getToolWindow() {
-        return Optional.of(ToolWindowManagerEx.getInstanceEx(this.project))
-                .map(toolWindowManager -> toolWindowManager.getToolWindow(ToolWindowId.PROJECT_VIEW))
-                .filter(ToolWindowEx.class::isInstance)
-                .map(ToolWindowEx.class::cast);
     }
 
     @NotNull
