@@ -6,9 +6,9 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.wm.ex.ToolWindowEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerEx;
 import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
-import com.intellij.openapi.wm.impl.ToolWindowImpl;
 import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
 
@@ -31,7 +31,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
         getToolWindow().ifPresent(this::decorateToolWindow);
     }
 
-    private void decorateToolWindow(ToolWindowImpl toolWindow) {
+    private void decorateToolWindow(ToolWindowEx toolWindow) {
         List<AnAction> actions = getProjectView()
                 .map(projectView -> projectView.getActions(false))
                 .orElse(new ArrayList<>());
@@ -56,14 +56,14 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
                 .filter(projectView -> projectView.getContentManager() != null);
     }
 
-    private Optional<ToolWindowImpl> getToolWindow() {
+    private Optional<ToolWindowEx> getToolWindow() {
         ToolWindowManagerEx toolWindowManager = ToolWindowManagerEx.getInstanceEx(this.project);
         return Optional.of(toolWindowManager)
                 .map(ToolWindowManagerEx::getLastActiveToolWindowId)
                 .filter("Project"::equals)
                 .map(toolWindowManager::getToolWindow)
-                .filter(ToolWindowImpl.class::isInstance)
-                .map(ToolWindowImpl.class::cast);
+                .filter(ToolWindowEx.class::isInstance)
+                .map(ToolWindowEx.class::cast);
     }
 
     @NotNull
