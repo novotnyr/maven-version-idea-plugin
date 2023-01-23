@@ -1,7 +1,6 @@
 package com.github.novotnyr.mavenversion;
 
 import com.intellij.ide.projectView.ProjectView;
-import com.intellij.ide.projectView.impl.ProjectViewImpl;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.project.Project;
@@ -55,11 +54,8 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
         }
     }
 
-    private Optional<ProjectViewImpl> getProjectView() {
-        return Optional.of(ProjectViewImpl.getInstance(this.project))
-                .filter(ProjectViewImpl.class::isInstance)
-                .map(ProjectViewImpl.class::cast)
-                .filter(projectView -> projectView.getContentManager() != null);
+    private Optional<ProjectView> getProjectView() {
+        return Optional.ofNullable(ProjectView.getInstance(this.project));
     }
 
     @NotNull
@@ -70,6 +66,6 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
     }
 
     private void refreshProjectView() {
-        getProjectView().ifPresent(ProjectViewImpl::refresh);
+        getProjectView().ifPresent(ProjectView::refresh);
     }
 }
