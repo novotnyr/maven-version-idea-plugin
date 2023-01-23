@@ -34,7 +34,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
     }
 
     private void decorateToolWindow(ToolWindowEx toolWindow) {
-        List<AnAction> actions = getActions(toolWindow);
+        List<AnAction> actions = getActions();
 
         if (actions.size() > 2) {
             // see com.intellij.ide.projectView.impl.ProjectViewImpl.getActions
@@ -45,7 +45,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
         toolWindow.setAdditionalGearActions(new DefaultActionGroup(actions));
     }
 
-    private List<AnAction> getActions(ToolWindowEx toolWindowEx) {
+    private List<AnAction> getActions() {
         ProjectView projectView = ProjectView.getInstance(this.project);
         if (projectView instanceof QuickActionProvider) {
             var defaultActions = ((QuickActionProvider) projectView).getActions(false);
