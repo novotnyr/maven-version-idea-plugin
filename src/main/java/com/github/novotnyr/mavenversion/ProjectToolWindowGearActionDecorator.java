@@ -1,39 +1,34 @@
 package com.github.novotnyr.mavenversion;
 
 import com.intellij.ide.projectView.impl.ProjectViewImpl;
+import com.intellij.openapi.Disposable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.DefaultActionGroup;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.wm.ex.ToolWindowManagerAdapter;
 import com.intellij.openapi.wm.ex.ToolWindowManagerEx;
+import com.intellij.openapi.wm.ex.ToolWindowManagerListener;
 import com.intellij.openapi.wm.impl.ToolWindowImpl;
+import com.intellij.util.messages.MessageBusConnection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ProjectToolWindowGearActionDecorator extends ToolWindowManagerAdapter implements ProjectComponent {
+public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerListener, ProjectComponent, Disposable {
     private final Project project;
+    private final MessageBusConnection projectBusConnection;
 
     public ProjectToolWindowGearActionDecorator(Project project) {
         this.project = project;
+        this.projectBusConnection = this.project.getMessageBus().connect();
+        this.projectBusConnection.subscribe(ToolWindowManagerListener.TOPIC, this);
     }
 
     @Override
     public void stateChanged() {
         getToolWindow().ifPresent(this::decorateToolWindow);
-    }
-
-    @Override
-    public void projectOpened() {
-        getToolWindowManager().addToolWindowManagerListener(this);
-    }
-
-    @Override
-    public void projectClosed() {
-        getToolWindowManager().removeToolWindowManagerListener(this);
     }
 
     private void decorateToolWindow(ToolWindowImpl toolWindow) {
@@ -80,5 +75,10 @@ public class ProjectToolWindowGearActionDecorator extends ToolWindowManagerAdapt
 
     private void refreshProjectView() {
         getProjectView().ifPresent(ProjectViewImpl::refresh);
+    }
+
+    @Override
+    public void dispose() {
+        this.projectBusConnection.disconnect();
     }
 }
