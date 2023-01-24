@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorator {
     @Override
-    public void decorate(ProjectViewNode node, PresentationData data) {
+    public void decorate(ProjectViewNode<?> node, PresentationData data) {
         Optional.of(node)
                 .filter(this::isDecorating)
                 .map(ProjectViewNode::getProject)
@@ -29,7 +29,7 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
                         .ifPresent(doDecorate(data)));
     }
 
-    private boolean isDecorating(ProjectViewNode node) {
+    private boolean isDecorating(@SuppressWarnings("unused") ProjectViewNode<?> node) {
         return PluginSettings.getInstance().isShowVersion();
     }
 
@@ -43,7 +43,7 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
                 .map(MavenId::getVersion);
     }
 
-    private Optional<VirtualFile> getPomXml(ProjectViewNode node) {
+    private Optional<VirtualFile> getPomXml(ProjectViewNode<?> node) {
         return Optional.ofNullable(node)
                 .map(ProjectViewNode::getVirtualFile)
                 .map(virtualFile -> virtualFile.findChild("pom.xml"));
