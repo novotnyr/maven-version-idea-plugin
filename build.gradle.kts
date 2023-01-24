@@ -14,6 +14,7 @@ intellij {
     type.set("IC")
 
     plugins.set(listOf("org.jetbrains.idea.maven"))
+    updateSinceUntilBuild.set(false)
 }
 
 tasks {
@@ -25,5 +26,11 @@ tasks {
 
     patchPluginXml {
         sinceBuild.set("213")
+        changeNotes.set("""
+            <ul>
+                <li>Require at least Platform 2021.3</li>
+                <li>Migrate to new API</li>
+            </ul>
+        """.trimIndent())
     }
 }
