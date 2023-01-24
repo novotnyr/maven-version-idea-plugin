@@ -23,10 +23,10 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
                 .map(ProjectViewNode::getProject)
                 .map(MavenProjectsManager::getInstance)
                 .filter(MavenProjectsManager::isMavenizedProject)
-                .ifPresent(mavenProjectsManager -> getPomXml(node)
+                .flatMap(mavenProjectsManager -> getPomXml(node)
                         .map(mavenProjectsManager::findProject)
-                        .flatMap(MavenVersionProjectViewDecorator.this::getVersion)
-                        .ifPresent(doDecorate(data)));
+                        .flatMap(MavenVersionProjectViewDecorator.this::getVersion))
+                .ifPresent(doDecorate(data));
     }
 
     private boolean isDecorating(@SuppressWarnings("unused") ProjectViewNode<?> node) {
