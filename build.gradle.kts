@@ -28,7 +28,7 @@ tasks {
         sinceBuild.set("213")
         changeNotes.set("""
             <ul>
-                <li>/li>
+                <li>Bugs and improvements/li>
             </ul>
         """.trimIndent())
     }
