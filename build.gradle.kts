@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.github.novotnyr"
-version = "4-SNAPSHOT"
+version = "4"
 
 repositories {
     mavenCentral()
