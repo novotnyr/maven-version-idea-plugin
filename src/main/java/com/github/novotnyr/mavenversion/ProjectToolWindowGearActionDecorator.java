@@ -50,7 +50,12 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
         var defaultActions = new ArrayList<AnAction>();
         if (projectView instanceof QuickActionProvider) {
             var actionProvider = (QuickActionProvider) projectView;
-            defaultActions.addAll(actionProvider.getActions(false));
+            try {
+                var providerActions = actionProvider.getActions(false);
+                defaultActions.addAll(providerActions);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
         return defaultActions;
     }
