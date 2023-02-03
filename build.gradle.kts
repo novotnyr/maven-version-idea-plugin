@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.github.novotnyr"
-version = "3"
+version = "4-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -28,8 +28,7 @@ tasks {
         sinceBuild.set("213")
         changeNotes.set("""
             <ul>
-                <li>Require at least Platform 2021.3</li>
-                <li>Migrate to new API</li>
+                <li>/li>
             </ul>
         """.trimIndent())
     }
