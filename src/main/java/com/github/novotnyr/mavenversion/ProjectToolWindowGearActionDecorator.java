@@ -54,7 +54,8 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
                 var providerActions = actionProvider.getActions(false);
                 defaultActions.addAll(providerActions);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                // Some versions of platform trigger: Cannot invoke "com.intellij.ui.content.ContentManager.getContentCount()" because "this.myContentManager" is null
+                // Let's ignore this error and return empty actions
             }
         }
         return defaultActions;
