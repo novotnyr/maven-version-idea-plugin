@@ -3,7 +3,7 @@ plugins {
 }
 
 group = "com.github.novotnyr"
-version = "5"
+version = "6-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -28,7 +28,6 @@ tasks {
         sinceBuild.set("213")
         changeNotes.set("""
             <ul>
-                <li>Fix errors when a project is opened</li>
                 <li>Bugs and improvements</li>
             </ul>
         """.trimIndent())
