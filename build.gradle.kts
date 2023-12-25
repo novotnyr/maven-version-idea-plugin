@@ -10,11 +10,11 @@ repositories {
 }
 
 intellij {
-    version.set("2021.3")
-    type.set("IC")
+    version = "2021.3"
+    type = "IC"
 
-    plugins.set(listOf("org.jetbrains.idea.maven"))
-    updateSinceUntilBuild.set(false)
+    plugins = listOf("org.jetbrains.idea.maven")
+    updateSinceUntilBuild = false
 }
 
 tasks {
@@ -25,11 +25,11 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("213")
-        changeNotes.set("""
+        sinceBuild = "213"
+        changeNotes = """
             <ul>
                 <li>Bugs and improvements</li>
             </ul>
-        """.trimIndent())
+        """.trimIndent()
     }
 }
