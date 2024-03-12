@@ -1,5 +1,6 @@
 plugins {
-    id("org.jetbrains.intellij") version "1.16.1"
+    kotlin("jvm") version "1.9.23"
+    id("org.jetbrains.intellij.platform") version "2.0.0-SNAPSHOT"
 }
 
 group = "com.github.novotnyr"
@@ -7,29 +8,40 @@ version = "6-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    intellijPlatform {
+        defaultRepositories()
+    }
 }
 
-intellij {
-    version = "2021.3"
-    type = "IC"
+dependencies {
+    intellijPlatform {
+        intellijIdeaCommunity("2022.3")
+        bundledPlugins("org.jetbrains.idea.maven", "org.jetbrains.idea.maven.model", "org.jetbrains.idea.maven.server.api")
+        instrumentationTools()
 
-    plugins = listOf("org.jetbrains.idea.maven")
-    updateSinceUntilBuild = false
+    }
+}
+
+
+intellijPlatform {
+    instrumentCode = false
+    buildSearchableOptions = false
+    pluginConfiguration {
+        ideaVersion {
+            sinceBuild = "223"
+        }
+        changeNotes = """
+            <ul>
+            <li>Bugs and improvements</li>
+            </ul>
+        """.trimIndent()
+    }
 }
 
 tasks {
     // Set the JVM compatibility versions
     withType<JavaCompile> {
-        sourceCompatibility = "11"
-        targetCompatibility = "11"
-    }
-
-    patchPluginXml {
-        sinceBuild = "213"
-        changeNotes = """
-            <ul>
-                <li>Bugs and improvements</li>
-            </ul>
-        """.trimIndent()
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
     }
 }
