@@ -5,8 +5,6 @@ import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.packageDependencies.ui.PackageDependenciesNode;
-import com.intellij.ui.ColoredTreeCellRenderer;
 import com.intellij.ui.SimpleTextAttributes;
 import org.jetbrains.idea.maven.model.MavenId;
 import org.jetbrains.idea.maven.project.MavenProject;
@@ -47,10 +45,5 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
         return Optional.ofNullable(node)
                 .map(ProjectViewNode::getVirtualFile)
                 .map(virtualFile -> virtualFile.findChild("pom.xml"));
-    }
-
-    @Override
-    public void decorate(PackageDependenciesNode node, ColoredTreeCellRenderer cellRenderer) {
-        // do nothing
     }
 }
