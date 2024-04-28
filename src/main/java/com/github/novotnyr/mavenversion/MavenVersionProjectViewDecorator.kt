@@ -15,10 +15,8 @@ class MavenVersionProjectViewDecorator : ProjectViewNodeDecorator {
         val nodeProject = node.project ?: return
         val projectManager = MavenProjectsManager.getInstance(nodeProject) ?: return
         val pomXml = node.pomXml ?: return
-        val mavenProject = projectManager.findProject(pomXml)
-        mavenProject?.version?.let {
-            data.version = it
-        }
+        val mavenProject = projectManager.findProject(pomXml) ?: return
+        mavenProject.version?.let { data.version = it }
     }
 
     private val isDecorating: Boolean
