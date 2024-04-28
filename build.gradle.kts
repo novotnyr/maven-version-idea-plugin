@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.23"
-    id("org.jetbrains.intellij.platform") version "2.0.0-SNAPSHOT"
+    id("org.jetbrains.intellij.platform") version "2.0.0-beta1"
 }
 
 group = "com.github.novotnyr"
