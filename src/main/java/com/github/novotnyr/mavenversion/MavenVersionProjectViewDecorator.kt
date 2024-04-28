@@ -24,11 +24,9 @@ class MavenVersionProjectViewDecorator : ProjectViewNodeDecorator {
 
     private var PresentationData.version: String
         get() = ""
-        set(value) {
+        set(version) {
             val separator = if (SystemInfo.isWindows) "  " else "\t"
-            addText(
-                separator + value, SimpleTextAttributes.GRAY_ATTRIBUTES
-            )
+            addText(separator + version, SimpleTextAttributes.GRAY_ATTRIBUTES)
         }
 
     private val MavenProject.version: String?
