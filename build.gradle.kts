@@ -22,7 +22,6 @@ dependencies {
             "org.jetbrains.idea.maven.server.api"
         )
         pluginVerifier()
-        zipSigner()
         instrumentationTools()
     }
 }
