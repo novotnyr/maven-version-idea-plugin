@@ -24,7 +24,6 @@ dependencies {
         pluginVerifier()
         zipSigner()
         instrumentationTools()
-
     }
 }
 
