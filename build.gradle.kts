@@ -16,7 +16,11 @@ repositories {
 dependencies {
     intellijPlatform {
         intellijIdeaCommunity("2022.3")
-        bundledPlugins("org.jetbrains.idea.maven", "org.jetbrains.idea.maven.model", "org.jetbrains.idea.maven.server.api")
+        bundledPlugins(
+            "org.jetbrains.idea.maven",
+            "org.jetbrains.idea.maven.model",
+            "org.jetbrains.idea.maven.server.api"
+        )
         pluginVerifier()
         instrumentationTools()
 
