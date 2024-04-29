@@ -22,6 +22,7 @@ dependencies {
             "org.jetbrains.idea.maven.server.api"
         )
         pluginVerifier()
+        zipSigner()
         instrumentationTools()
 
     }
@@ -31,6 +32,7 @@ dependencies {
 intellijPlatform {
     instrumentCode = false
     buildSearchableOptions = false
+
     pluginConfiguration {
         ideaVersion {
             sinceBuild = "223"
@@ -47,6 +49,11 @@ intellijPlatform {
         ides {
             recommended()
         }
+    }
+
+    publishing {
+        val intellijPublishToken: String by project
+        token = intellijPublishToken
     }
 }
 
