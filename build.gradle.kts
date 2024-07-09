@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.github.novotnyr"
-version = "6-SNAPSHOT"
+version = "6"
 
 repositories {
     mavenCentral()
@@ -38,7 +38,7 @@ intellijPlatform {
         }
         changeNotes = """
             <ul>
-            <li>Bugs and improvements</li>
+            <li>Improve compatibility with the recent Platform versions</li>
             </ul>
         """.trimIndent()
     }
