@@ -11,7 +11,7 @@ public class ToggleShowMavenSettingsAction extends ToggleAction {
     private Runnable onUpdateListener = () -> {};
 
     public ToggleShowMavenSettingsAction() {
-        super("Show Maven version in modules");
+        super("Show Maven Version in Modules");
     }
 
     @Override
