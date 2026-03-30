@@ -1,3 +1,5 @@
+import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
+
 plugins {
     kotlin("jvm") version "1.9.23"
     id("org.jetbrains.intellij.platform") version "2.13.1"
@@ -57,4 +59,9 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
     }
+}
+
+val runIde261 by intellijPlatformTesting.runIde.registering {
+    type = IntelliJPlatformType.IntellijIdea
+    version = "2026.1"
 }
