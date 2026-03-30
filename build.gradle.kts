@@ -1,6 +1,6 @@
 plugins {
     kotlin("jvm") version "1.9.23"
-    id("org.jetbrains.intellij.platform") version "2.0.0-beta8"
+    id("org.jetbrains.intellij.platform") version "2.13.1"
 }
 
 group = "com.github.novotnyr"
@@ -15,14 +15,13 @@ repositories {
 
 dependencies {
     intellijPlatform {
-        intellijIdeaCommunity("2022.3")
+        intellijIdeaCommunity("2024.1")
         bundledPlugins(
             "org.jetbrains.idea.maven",
             "org.jetbrains.idea.maven.model",
-            "org.jetbrains.idea.maven.server.api"
+            "org.jetbrains.idea.maven.server.api",
+            "org.jetbrains.idea.reposearch"
         )
-        pluginVerifier()
-        instrumentationTools()
     }
 }
 
@@ -42,7 +41,7 @@ intellijPlatform {
         """.trimIndent()
     }
 
-    verifyPlugin {
+    pluginVerification {
         ides {
             recommended()
         }
