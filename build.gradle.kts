@@ -33,12 +33,11 @@ intellijPlatform {
 
     pluginConfiguration {
         ideaVersion {
-            sinceBuild = "223"
-            untilBuild = "241.*"
+            sinceBuild = "241"
         }
         changeNotes = """
             <ul>
-            <li>Improve compatibility with the recent Platform versions</li>
+            <li>Require at least Platform 2024.1</li>
             </ul>
         """.trimIndent()
     }
