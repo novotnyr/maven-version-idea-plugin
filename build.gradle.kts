@@ -60,6 +60,11 @@ java {
     }
 }
 
+val runIde253 by intellijPlatformTesting.runIde.registering {
+    type = IntelliJPlatformType.IntellijIdea
+    version = "2025.3"
+}
+
 val runIde261 by intellijPlatformTesting.runIde.registering {
     type = IntelliJPlatformType.IntellijIdea
     version = "2026.1"
