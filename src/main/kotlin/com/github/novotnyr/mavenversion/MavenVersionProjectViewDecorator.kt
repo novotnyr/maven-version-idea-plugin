@@ -4,7 +4,6 @@ import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectViewNode
 import com.intellij.ide.projectView.ProjectViewNodeDecorator
 import com.intellij.openapi.application.ApplicationInfo
-import com.intellij.openapi.components.service
 import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.ui.SimpleTextAttributes
@@ -15,7 +14,7 @@ private const val POM_XML = "pom.xml"
 class MavenVersionProjectViewDecorator : ProjectViewNodeDecorator {
 
     override fun decorate(node: ProjectViewNode<*>, data: PresentationData) {
-        if (!isDecorating()) return
+        if (!PluginSettings.showVersion) return
 
         val project = node.project ?: return
         val mavenProjectsManager = MavenProjectsManager.getInstance(project)
@@ -28,8 +27,6 @@ class MavenVersionProjectViewDecorator : ProjectViewNodeDecorator {
                 data.addText("$separator$version", SimpleTextAttributes.GRAY_ATTRIBUTES)
             }
     }
-
-    private fun isDecorating(): Boolean = service<PluginSettings>().state.showVersion
 
     private val ProjectViewNode<*>.pomXml: VirtualFile?
         get() = virtualFile?.findChild(POM_XML)
