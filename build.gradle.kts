@@ -1,7 +1,6 @@
 import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 plugins {
-    kotlin("jvm") version "1.9.23"
     id("org.jetbrains.intellij.platform") version "2.13.1"
 }
 
