@@ -67,9 +67,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
 
     @NotNull
     private ToggleShowMavenSettingsAction createToggleMavenVersionAction() {
-        ToggleShowMavenSettingsAction action = new ToggleShowMavenSettingsAction();
-        action.setOnUpdateListener(this::refreshProjectView);
-        return action;
+        return new ToggleShowMavenSettingsAction(this::refreshProjectView);
     }
 
     private void refreshProjectView() {

@@ -1,37 +1,22 @@
-package com.github.novotnyr.mavenversion;
+package com.github.novotnyr.mavenversion
 
-import com.intellij.openapi.actionSystem.ActionUpdateThread;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.ToggleAction;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.actionSystem.ActionUpdateThread
+import com.intellij.openapi.actionSystem.AnActionEvent
+import com.intellij.openapi.actionSystem.ToggleAction
+import java.util.*
 
-import java.util.Objects;
-
-public class ToggleShowMavenSettingsAction extends ToggleAction {
-    private Runnable onUpdateListener = () -> {};
-
-    public ToggleShowMavenSettingsAction() {
-        super("Show Maven Version in Modules");
+class ToggleShowMavenSettingsAction(private val onUpdate: Runnable) : ToggleAction("Show Maven Version in Modules") {
+    override fun isSelected(e: AnActionEvent): Boolean {
+        return PluginSettings.getInstance().isShowVersion
     }
 
-    @Override
-    public boolean isSelected(@NotNull AnActionEvent e) {
-        return PluginSettings.getInstance().isShowVersion();
+    override fun setSelected(e: AnActionEvent, state: Boolean) {
+        PluginSettings.getInstance().isShowVersion = state
+        onUpdate.run()
     }
 
-    @Override
-    public void setSelected(@NotNull AnActionEvent e, boolean state) {
-        PluginSettings.getInstance().setShowVersion(state);
-        this.onUpdateListener.run();
-    }
-
-    public void setOnUpdateListener(Runnable onUpdateListener) {
-        this.onUpdateListener = Objects.requireNonNull(onUpdateListener);
-    }
-
-    @Override
-    public @NotNull ActionUpdateThread getActionUpdateThread() {
-        return ActionUpdateThread.BGT;
+    override fun getActionUpdateThread(): ActionUpdateThread {
+        return ActionUpdateThread.BGT
     }
 }
 
