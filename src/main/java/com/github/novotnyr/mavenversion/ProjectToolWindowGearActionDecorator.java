@@ -26,8 +26,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
     @Override
     public void stateChanged(@NotNull ToolWindowManager toolWindowManager) {
         ToolWindow projectView = toolWindowManager.getToolWindow(ToolWindowId.PROJECT_VIEW);
-        if (projectView instanceof ToolWindowEx) {
-            var projectViewEx = (ToolWindowEx) projectView;
+        if (projectView instanceof ToolWindowEx projectViewEx) {
             this.decorateToolWindow(projectViewEx);
         }
     }
@@ -48,8 +47,7 @@ public class ProjectToolWindowGearActionDecorator implements ToolWindowManagerLi
 
     private List<AnAction> getDefaultProjectViewActions(ProjectView projectView) {
         var defaultActions = new ArrayList<AnAction>();
-        if (projectView instanceof QuickActionProvider) {
-            var actionProvider = (QuickActionProvider) projectView;
+        if (projectView instanceof QuickActionProvider actionProvider) {
             try {
                 var providerActions = actionProvider.getActions(false);
                 defaultActions.addAll(providerActions);
