@@ -2,10 +2,15 @@ import org.jetbrains.intellij.platform.gradle.IntelliJPlatformType
 
 plugins {
     id("org.jetbrains.intellij.platform") version "2.13.1"
+    kotlin("jvm") version "2.3.20"
 }
 
 group = "com.github.novotnyr"
 version = "7-SNAPSHOT"
+
+kotlin {
+    jvmToolchain(17)
+}
 
 repositories {
     mavenCentral()
