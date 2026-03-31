@@ -18,16 +18,21 @@
     <depends>org.jetbrains.idea.maven</depends>
     <depends>org.jetbrains.idea.reposearch</depends>
 
-    <projectListeners>
-        <listener class="com.github.novotnyr.mavenversion.ProjectToolWindowGearActionDecorator"
-                  topic="com.intellij.openapi.wm.ex.ToolWindowManagerListener"/>
-    </projectListeners>
-
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceImplementation="com.github.novotnyr.mavenversion.PluginSettings"/>
         <projectViewNodeDecorator implementation="com.github.novotnyr.mavenversion.MavenVersionProjectViewDecorator"/>
     </extensions>
 
     <actions>
+        <action id="com.github.novotnyr.mavenversion.ToggleShowMavenSettingsAction"
+                class="com.github.novotnyr.mavenversion.ToggleShowMavenSettingsAction"
+                text="Maven Version in Modules"
+                description="Show Maven version for modules in Project View">
+            <add-to-group group-id="ProjectView.ToolWindow.Appearance.Actions"
+                          relative-to-action="ViewInplaceComments"
+                          anchor="after"
+            />
+        </action>
+
     </actions>
 </idea-plugin>
