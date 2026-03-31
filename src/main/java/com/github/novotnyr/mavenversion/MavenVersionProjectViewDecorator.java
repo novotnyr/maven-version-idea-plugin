@@ -24,7 +24,7 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
                 .filter(MavenProjectsManager::isMavenizedProject)
                 .flatMap(mavenProjectsManager -> getPomXml(node)
                         .map(mavenProjectsManager::findProject)
-                        .flatMap(MavenVersionProjectViewDecorator.this::getVersion))
+                        .flatMap(this::getVersion))
                 .ifPresent(doDecorate(data));
     }
 
