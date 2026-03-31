@@ -38,6 +38,7 @@ intellijPlatform {
         changeNotes = """
             <ul>
             <li>Require at least Platform 2024.1</li>
+            <li>Improve compatibility with 2026.1</li>
             </ul>
         """.trimIndent()
     }
