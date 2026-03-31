@@ -4,6 +4,7 @@ import com.intellij.ide.projectView.PresentationData
 import com.intellij.ide.projectView.ProjectViewNode
 import com.intellij.ide.projectView.ProjectViewNodeDecorator
 import com.intellij.openapi.application.ApplicationInfo
+import com.intellij.openapi.components.service
 import com.intellij.openapi.util.SystemInfo
 import com.intellij.openapi.vfs.VirtualFile
 import com.intellij.ui.SimpleTextAttributes
@@ -28,7 +29,7 @@ class MavenVersionProjectViewDecorator : ProjectViewNodeDecorator {
             }
     }
 
-    private fun isDecorating(): Boolean = PluginSettings.getInstance().isShowVersion
+    private fun isDecorating(): Boolean = service<PluginSettings>().state.showVersion
 
     private val ProjectViewNode<*>.pomXml: VirtualFile?
         get() = virtualFile?.findChild(POM_XML)

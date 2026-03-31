@@ -19,7 +19,6 @@
     <depends>org.jetbrains.idea.reposearch</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceImplementation="com.github.novotnyr.mavenversion.PluginSettings"/>
         <projectViewNodeDecorator implementation="com.github.novotnyr.mavenversion.MavenVersionProjectViewDecorator"/>
     </extensions>
 
