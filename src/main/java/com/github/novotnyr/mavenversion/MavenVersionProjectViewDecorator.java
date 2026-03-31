@@ -3,6 +3,7 @@ package com.github.novotnyr.mavenversion;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ProjectViewNodeDecorator;
+import com.intellij.openapi.application.ApplicationInfo;
 import com.intellij.openapi.util.SystemInfo;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.SimpleTextAttributes;
@@ -32,8 +33,7 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
     }
 
     private Consumer<String> doDecorate(PresentationData data) {
-        String separator = SystemInfo.isWindows ? "  " : "\t";
-        return version -> data.addText(separator + version, SimpleTextAttributes.GRAY_ATTRIBUTES);
+        return version -> data.addText(getSeparator() + version, SimpleTextAttributes.GRAY_ATTRIBUTES);
     }
 
     private Optional<String> getVersion(MavenProject mavenProject) {
@@ -45,5 +45,15 @@ public class MavenVersionProjectViewDecorator implements ProjectViewNodeDecorato
         return Optional.ofNullable(node)
                 .map(ProjectViewNode::getVirtualFile)
                 .map(virtualFile -> virtualFile.findChild("pom.xml"));
+    }
+
+    private String getSeparator() {
+        if (SystemInfo.isWindows) {
+            return "  ";
+        } else if (ApplicationInfo.getInstance().getBuild().getBaselineVersion() >= 261) {
+            return " ";
+        } else {
+            return "\t";
+        }
     }
 }
