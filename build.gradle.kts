@@ -24,8 +24,6 @@ dependencies {
         intellijIdeaCommunity("2024.1")
         bundledPlugins(
             "org.jetbrains.idea.maven",
-            "org.jetbrains.idea.maven.model",
-            "org.jetbrains.idea.maven.server.api",
             "org.jetbrains.idea.reposearch"
         )
     }
