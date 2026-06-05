@@ -53,8 +53,7 @@ intellijPlatform {
     }
 
     publishing {
-        val intellijPublishToken: String by project
-        token = intellijPublishToken
+        token.set(providers.gradleProperty("intellijPublishToken"))
     }
 }
 

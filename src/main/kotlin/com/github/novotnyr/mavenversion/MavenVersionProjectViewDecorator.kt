@@ -33,8 +33,8 @@ class MavenVersionProjectViewDecorator : ProjectViewNodeDecorator {
 
     private val separator: String
         get() = when {
+            ApplicationInfo.getInstance().build.baselineVersion >= 261 -> "  "
             SystemInfo.isWindows -> "  "
-            ApplicationInfo.getInstance().build.baselineVersion >= 261 -> " "
             else -> "\t"
         }
 }
